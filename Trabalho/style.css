@@ -1,0 +1,1147 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #131419;
+    color: #e0e0e0;
+    font-family: 'Raleway', sans-serif;
+    padding: 40px 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+header h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 3rem;
+    color: #d4af37;
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+}
+
+/* Grid */
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Card */
+.card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, opacity 0.5s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    border-color: #d4af37;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Imagem do card */
+.card-image {
+    position: relative;
+    height: 350px;
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(30%);
+    transition: filter 0.3s;
+}
+
+.card:hover .card-image {
+    filter: grayscale(0%);
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.classe {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: #d4af37;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.card-content h3 {
+    font-family: 'Cinzel', serif;
+    margin: 10px 0;
+    font-size: 1.5rem;
+}
+
+.card-content p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #aaa;
+    margin-bottom: 20px;
+}
+
+/* Stats */
+.stats {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 15px;
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
+.stats span {
+    color: #d4af37;
+}
+
+/* Vilão */
+.boss-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 80px 20px;
+    background: linear-gradient(to top, #1a0505, transparent);
+    margin-top: 50px;
+}
+
+.divider {
+    width: 70%;
+    border: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #2f6f94, transparent);
+    margin-bottom: 40px;
+}
+
+.boss-title {
+    font-family: 'Cinzel', serif;
+    color: #4983a6;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    letter-spacing: 5px;
+    text-shadow: 0 0 15px rgba(37, 133, 177, 0.4);
+}
+
+.boss-card {
+    max-width: 450px;
+    width: 100%;
+    border: 1px solid rgba(46, 119, 208, 0.2);
+}
+
+.boss-card:hover {
+    border-color: #6591e3;
+    box-shadow: 0 10px 40px rgba(0, 187, 255, 0.3);
+}
+
+.boss-card .classe,
+.boss-card .stats span {
+    color: #3499cc;
+}
+
+/* ============================================================
+   ANIMAÇÃO DE ENTRADA DOS CARDS
+   ============================================================ */
+
+.card-animado {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.card-animado.card-visivel {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ============================================================
+   STATUS — badge no canto inferior da imagem
+   ============================================================ */
+
+.card-status-group {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.card-status {
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    color: #fff;
+}
+
+/* ============================================================
+   FAVORITO — estrela no canto superior do card
+   ============================================================ */
+
+.card-fav {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    font-size: 1rem;
+    color: #d4af37;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, transform 0.15s;
+    z-index: 2;
+}
+
+.modal-acoes button {
+    flex: 1;
+    padding: 10px 14px;
+    border-radius: 10px;
+
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    background: linear-gradient(135deg, rgba(212,175,55,0.1), rgba(0,0,0,0.2));
+    
+    color: #d4af37;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    
+    cursor: pointer;
+    transition: all 0.25s ease;
+
+    backdrop-filter: blur(4px);
+}
+
+/* HOVER padrão (dourado elegante) */
+.modal-acoes button:hover {
+    background: linear-gradient(135deg, rgba(212,175,55,0.25), rgba(0,0,0,0.3));
+    border-color: #d4af37;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 0 12px rgba(212,175,55,0.4);
+}
+
+/* Clique */
+.modal-acoes button:active {
+    transform: scale(0.97);
+}
+
+/* ============================================================
+   BADGES DE CARACTERÍSTICAS
+   ============================================================ */
+
+.modal-caracteristicas {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 12px 0;
+    padding: 12px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.badge-caracteristica {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    animation: fadeInBadge 0.4s ease-out;
+}
+
+@keyframes fadeInBadge {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ============================================================
+   MODAL — FICHA DO PERSONAGEM
+   ============================================================ */
+
+#modal-ficha {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+#modal-ficha.modal-aberto {
+    display: flex;
+}
+
+.modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    animation: fadeIn 0.25s ease;
+}
+
+.modal-conteudo {
+    position: relative;
+    display: flex;
+    width: 90%;
+    max-width: 780px;
+    max-height: 90vh;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 2px solid #d4af37;
+    background: #16161e;
+    animation: subirModal 0.3s ease;
+    transition: border-color 0.5s ease, box-shadow 0.5s ease;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+}
+
+/* Estilos dinâmicos para diferentes características */
+.modal-conteudo {
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+}
+
+.modal-imagem {
+    position: relative;
+    width: 280px;
+    flex-shrink: 0;
+    background-size: cover;
+    background-position: center;
+}
+
+#modal-estatica {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.modal-corpo {
+    padding: 35px 30px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.modal-cabecalho {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.modal-corpo h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    color: #d4af37;
+}
+
+.modal-corpo p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #bbb;
+}
+
+.modal-status-group {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.modal-status {
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    color: #fff;
+}
+
+.modal-stats {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-fechar {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 1.8rem;
+    cursor: pointer;
+    line-height: 1;
+    z-index: 10;
+    transition: color 0.2s;
+}
+
+.modal-fechar:hover {
+    color: #d4af37;
+}
+
+/* Botões de ação do modal */
+.modal-acoes {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-fav-modal,
+.btn-compartilhar {
+    flex: 1;
+    padding: 9px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+    color: #e0e0e0;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.btn-fav-modal:hover {
+    background: rgba(212, 175, 55, 0.15);
+    border-color: #d4af37;
+    color: #d4af37;
+}
+
+.btn-compartilhar:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Modal do boss */
+#modal-ficha.boss .modal-conteudo {
+    border-color: rgba(255, 77, 77, 0.3);
+}
+
+/* ============================================================
+   TOAST — notificação rápida
+   ============================================================ */
+
+#toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: #1e1e2a;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    color: #d4af37;
+    padding: 10px 22px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-family: 'Raleway', sans-serif;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 2000;
+}
+
+#toast.toast-visivel {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ============================================================
+   ANIMAÇÕES
+   ============================================================ */
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes subirModal {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   RESPONSIVO
+   ============================================================ */
+
+@media (max-width: 600px) {
+    .modal-conteudo {
+        flex-direction: column;
+        max-height: 95vh;
+    }
+
+    .modal-imagem {
+        width: 100%;
+        height: 220px;
+    }
+}
+
+#btn-play-audio {
+    flex: 1;
+    padding: 10px 14px;
+    border-radius: 10px;
+
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    background: linear-gradient(135deg, rgba(212,175,55,0.1), rgba(0,0,0,0.2));
+    
+    color: #d4af37;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    
+    cursor: pointer;
+    transition: all 0.25s ease;
+
+    backdrop-filter: blur(4px);
+}
+
+/* Hover (efeito dourado bonito) */
+#btn-play-audio:hover {
+    background: linear-gradient(135deg, rgba(212,175,55,0.25), rgba(0,0,0,0.3));
+    border-color: #d4af37;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 0 12px rgba(212,175,55,0.4);
+}
+
+/* Clique */
+#btn-play-audio:active {
+    transform: scale(0.97);
+}
+
+/* Quando estiver tocando (opcional, você pode ativar via JS depois) */
+#btn-play-audio.playing {
+    color: #ff4d4d;
+    border-color: rgba(255,77,77,0.4);
+    box-shadow: 0 0 10px rgba(255,77,77,0.4);
+}
+
+#btn-play-audio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* Ícone base */
+#btn-play-audio .icon {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    position: relative;
+}
+
+/* ▶️ PLAY (triângulo) */
+#btn-play-audio .icon::before {
+    content: "";
+    position: absolute;
+    left: 3px;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-left: 10px solid currentColor;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+}
+
+/* ⏸️ PAUSE */
+#btn-play-audio.playing .icon::before {
+    width: 4px;
+    height: 14px;
+    background: currentColor;
+    border: none;
+    left: 2px;
+    top: 0;
+    box-shadow: 6px 0 0 currentColor;
+}
+
+/* ============================================================
+   ESTILOS PARA RELACIONAMENTOS
+   ============================================================ */
+
+.modal-relacionamentos {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-overlay-rel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+}
+
+.modal-conteudo-rel {
+    position: relative;
+    z-index: 2001;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    border: 2px solid #1e79c4;
+    border-radius: 15px;
+    padding: 30px;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 0 30px rgba(30, 36, 196, 0.5);
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-conteudo-rel h2 {
+    color: #5ca0b0;
+    margin-bottom: 20px;
+    font-size: 24px;
+    border-bottom: 2px solid #1e60c4;
+    padding-bottom: 10px;
+}
+
+.modal-conteudo-rel h3 {
+    color: #fff;
+    font-size: 16px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+.modal-fechar-rel {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #1e2329;
+    color: white;
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal-fechar-rel:hover {
+    background: #2e6ab9;
+    transform: rotate(90deg);
+}
+
+.relacionamentos-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.rel-card {
+    background: rgba(37, 105, 230, 0.05);
+    border: 1px solid #42788e;
+    border-radius: 10px;
+    padding: 15px;
+    transition: all 0.3s ease;
+}
+
+.rel-card:hover {
+    background: rgba(30, 138, 196, 0.1);
+    border-color: #66c9ff;
+    transform: translateX(5px);
+}
+
+.rel-card-conectado {
+    background: rgba(30, 138, 196, 0.15);
+    border-color: #ff9500;
+    cursor: pointer;
+}
+
+.rel-card-conectado:hover {
+    background: rgba(30, 119, 196, 0.25);
+    border-color: #ffb84d;
+}
+
+.rel-tipo {
+    color: #1e8dc4;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.rel-descricao {
+    color: #e0e0e0;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* Toast de confirmação */
+#toast {
+    position: fixed;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1e74c4;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    font-size: 14px;
+    z-index: 3000;
+    transition: bottom 0.3s ease;
+    font-weight: 600;
+}
+
+#toast.toast-visivel {
+    bottom: 30px;
+}
+
+/* Scroll bar customizado para o modal */
+.modal-conteudo-rel::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal-conteudo-rel::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.modal-conteudo-rel::-webkit-scrollbar-thumb {
+    background: #1e9bc4;
+    border-radius: 10px;
+}
+
+.modal-conteudo-rel::-webkit-scrollbar-thumb:hover {
+    background: #66adff;
+}
+
+/* Responsivo para mobile */
+@media (max-width: 600px) {
+    .modal-conteudo-rel {
+        max-width: 90vw;
+        max-height: 90vh;
+        padding: 20px;
+    }
+    
+    .modal-conteudo-rel h2 {
+        font-size: 20px;
+    }
+    
+    .rel-card {
+        padding: 12px;
+    }
+}
+
+/* ============================================================
+   SISTEMA DE DADOS COM ANIMAÇÃO 3D
+   ============================================================ */
+
+.dados-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(212, 175, 55, 0.02));
+    border-radius: 20px;
+    margin-top: 60px;
+    border: 2px solid rgba(212, 175, 55, 0.2);
+}
+
+.dados-title {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    color: #d4af37;
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+    letter-spacing: 3px;
+}
+
+.dados-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.dado-btn {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border: none;
+    border-radius: 15px;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Cinzel', serif;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dado-d20 {
+    background: linear-gradient(135deg, #2563eb, #1e40af);
+    border: 2px solid #60a5fa;
+    color: #fff;
+    box-shadow: 0 0 20px rgba(37, 99, 235, 0.4);
+}
+
+.dado-d20:hover {
+    box-shadow: 0 0 30px rgba(37, 99, 235, 0.6);
+    transform: scale(1.05);
+}
+
+.dado-d12 {
+    background: linear-gradient(135deg, #dc2626, #991b1b);
+    border: 2px solid #f87171;
+    color: #fff;
+    box-shadow: 0 0 20px rgba(220, 38, 38, 0.4);
+}
+
+.dado-d12:hover {
+    box-shadow: 0 0 30px rgba(220, 38, 38, 0.6);
+    transform: scale(1.05);
+}
+
+.dado-d10 {
+    background: linear-gradient(135deg, #7c3aed, #5b21b6);
+    border: 2px solid #a78bfa;
+    color: #fff;
+    box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
+}
+
+.dado-d10:hover {
+    box-shadow: 0 0 30px rgba(124, 58, 237, 0.6);
+    transform: scale(1.05);
+}
+
+.dado-d6 {
+    background: linear-gradient(135deg, #059669, #065f46);
+    border: 2px solid #6ee7b7;
+    color: #fff;
+    box-shadow: 0 0 20px rgba(5, 150, 105, 0.4);
+}
+
+.dado-d6:hover {
+    box-shadow: 0 0 30px rgba(5, 150, 105, 0.6);
+    transform: scale(1.05);
+}
+
+.dado-btn:active {
+    transform: scale(0.95);
+}
+
+.dado-resultado {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.95);
+    border: 3px solid #d4af37;
+    border-radius: 20px;
+    padding: 40px;
+    z-index: 3000;
+    text-align: center;
+    min-width: 300px;
+    animation: aparecerDado 0.5s ease;
+    box-shadow: 0 0 50px rgba(212, 175, 55, 0.5);
+}
+
+@keyframes aparecerDado {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5) rotateZ(-45deg);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1) rotateZ(0deg);
+    }
+}
+
+.dado-resultado h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 3.5rem;
+    color: #d4af37;
+    margin: 20px 0;
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+    animation: girarResultado 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes girarResultado {
+    0% {
+        transform: rotateX(0deg) rotateY(0deg) scale(0.5);
+        opacity: 0;
+    }
+    50% {
+        transform: rotateX(180deg) rotateY(180deg) scale(1.1);
+    }
+    100% {
+        transform: rotateX(0deg) rotateY(0deg) scale(1);
+        opacity: 1;
+    }
+}
+
+.dado-resultado-tipo {
+    font-size: 1.2rem;
+    color: #aaa;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.dado-resultado-botoes {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+    justify-content: center;
+}
+
+.dado-resultado-botoes button {
+    padding: 10px 20px;
+    border: 1px solid #d4af37;
+    background: rgba(212, 175, 55, 0.1);
+    color: #d4af37;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Raleway', sans-serif;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.dado-resultado-botoes button:hover {
+    background: rgba(212, 175, 55, 0.25);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+    transform: translateY(-2px);
+}
+
+.dado-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 2999;
+    cursor: pointer;
+}
+
+.dice-spinner {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(212, 175, 55, 0.3);
+    border-top-color: #d4af37;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.dado-lancando {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: #d4af37;
+}
+
+/* Efeito de confete ao rolar dado */
+@keyframes confete {
+    0% {
+        transform: translateY(-100vh) rotateZ(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotateZ(720deg);
+        opacity: 0;
+    }
+}
+
+.confete {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: #d4af37;
+    pointer-events: none;
+    z-index: 3001;
+}
+
+/* Responsivo dados */
+@media (max-width: 600px) {
+    .dados-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dado-btn {
+        width: 100px;
+        height: 100px;
+        font-size: 1.5rem;
+    }
+
+    .dado-resultado {
+        min-width: 250px;
+        padding: 30px;
+    }
+
+    .dado-resultado h1 {
+        font-size: 2.5rem;
+    }
+}
+
+
+/* ============================================================
+   TELA DE INÍCIO
+   ============================================================ */
+
+#tela-inicio {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+
+    background-image: url('inicioo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+    z-index: 99999;
+}
+
+/* Escurece a imagem */
+#tela-inicio .overlay {
+    
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(2px);
+}
+
+.inicio-conteudo {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    animation: surgir 1.2s ease;
+}
+
+.inicio-conteudo h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 5rem;
+    color: #d4af37;
+    letter-spacing: 8px;
+    text-shadow:
+        0 0 10px rgba(212,175,55,0.5),
+        0 0 25px rgba(212,175,55,0.3);
+}
+
+.inicio-conteudo p {
+    margin-top: 10px;
+    color: #ccc;
+    letter-spacing: 4px;
+    font-size: 1.1rem;
+}
+
+#btn-entrar {
+    margin-top: 35px;
+    padding: 14px 40px;
+
+    border: 1px solid rgba(212,175,55,0.4);
+    border-radius: 12px;
+
+    background: rgba(0,0,0,0.4);
+    color: #d4af37;
+
+    font-size: 1rem;
+    letter-spacing: 2px;
+    font-family: 'Raleway', sans-serif;
+
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    backdrop-filter: blur(5px);
+}
+
+#btn-entrar:hover {
+    transform: translateY(-3px) scale(1.03);
+    background: rgba(212,175,55,0.15);
+    box-shadow: 0 0 20px rgba(212,175,55,0.35);
+    color: white;
+}
+
+/* animação */
+@keyframes surgir {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* some ao entrar */
+#tela-inicio.sumir {
+    animation: fadeOutTela 1s ease forwards;
+}
+
+@keyframes fadeOutTela {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+    .inicio-conteudo h1 {
+        font-size: 3rem;
+    }
+
+    .inicio-conteudo p {
+        font-size: 0.9rem;
+    }
+}
